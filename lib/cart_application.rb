@@ -7,11 +7,27 @@ product_database = {
 
 class CartApplication
   def self.display_cart(cart)
-    puts "Your cart:
+    error = validate_qty(cart)
+
+    if error
+      puts error
+    else
+      puts "Your cart:
 
 " + line_items_string(cart) +
 "---
 Total $" + total(cart)
+    end
+  end
+
+  def self.validate_qty(cart)
+    error = nil
+    cart[0].each do |item|
+      error_string = "We're sorry, something went wrong. Please check your order and try again."
+      error = item.quantity > 0 ? nil : error_string
+    end
+
+    error
   end
 
   def self.line_items_string(cart)
@@ -36,5 +52,4 @@ Total $" + total(cart)
 
     cents_for_output(total_in_cents)
   end
-
 end
