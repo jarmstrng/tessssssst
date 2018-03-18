@@ -1,4 +1,5 @@
 require 'product'
+require 'invoice_builder'
 
 product_database = {
   1 => Product.new("Black Jacobins", 20_00),
@@ -7,7 +8,8 @@ product_database = {
 
 class CartApplication
   def self.display_cart(cart)
-    error = validate_qty(cart)
+    invoicer = InvoiceBuilder.new
+    error = invoicer.validate_qty(cart[0])
 
     if error
       puts error
@@ -18,16 +20,6 @@ class CartApplication
 "---
 Total $" + total(cart)
     end
-  end
-
-  def self.validate_qty(cart)
-    error = nil
-    cart[0].each do |item|
-      error_string = "We're sorry, something went wrong. Please check your order and try again."
-      error = item.quantity > 0 ? nil : error_string
-    end
-
-    error
   end
 
   def self.line_items_string(cart)

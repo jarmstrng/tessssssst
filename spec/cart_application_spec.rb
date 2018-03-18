@@ -2,6 +2,7 @@ require 'cart_application'
 require 'order'
 require 'line_item'
 require 'product'
+require 'invoice_builder'
 
 product_database = {
   1 => Product.new("Black Jacobins", 20_00),
@@ -9,17 +10,6 @@ product_database = {
 }
 
 describe CartApplication do
-  context "with bad quantity" do
-    it "returns an error" do
-      qty = 0
-      cart = Order.new([LineItem.new(product_database[1], qty)])
-      output = "We're sorry, something went wrong. Please check your order and try again."
-
-      expect(STDOUT).to receive(:puts).with(output)
-      CartApplication.display_cart(cart)
-    end
-  end
-
   context "display_cart" do
     it "displays order" do
       qty = 1
