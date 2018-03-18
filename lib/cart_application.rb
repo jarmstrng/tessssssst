@@ -1,10 +1,4 @@
-require 'product'
 require 'invoice_builder'
-
-product_database = {
-  1 => Product.new("Black Jacobins", 20_00),
-  2 => Product.new("Freedom Is a Constant Struggle", 15_00)
-}
 
 class CartApplication
   def self.display_cart(cart)
