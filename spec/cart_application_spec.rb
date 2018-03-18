@@ -11,20 +11,7 @@ product_database = {
 
 describe CartApplication do
   context "display_cart" do
-    it "displays order" do
-      qty = 1
-      cart = Order.new([LineItem.new(product_database[1], qty)])
-      output = "Your cart:
-
-1 copy of \"Black Jacobins\" for $20.00
----
-Total $20.00"
-
-      expect(STDOUT).to receive(:puts).with(output)
-      CartApplication.display_cart(cart)
-    end
-
-    it "displays multiple line items" do
+    it "displays formatted order with total" do
       cart = Order.new([LineItem.new(product_database[1], 1), LineItem.new(product_database[2], 2)])
       output = "Your cart:
 
@@ -32,19 +19,6 @@ Total $20.00"
 2 copy of \"Freedom Is a Constant Struggle\" for $15.00
 ---
 Total $50.00"
-
-      expect(STDOUT).to receive(:puts).with(output)
-      CartApplication.display_cart(cart)
-    end
-
-    it "displays correct quantity" do
-      qty = 2
-      cart = Order.new([LineItem.new(product_database[1], qty)])
-      output = "Your cart:
-
-2 copy of \"Black Jacobins\" for $20.00
----
-Total $40.00"
 
       expect(STDOUT).to receive(:puts).with(output)
       CartApplication.display_cart(cart)
