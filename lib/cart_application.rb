@@ -12,19 +12,24 @@ class CartApplication
     error = invoicer.validate_qty(cart[0])
 
     line_items = invoicer.build_full_line_items(cart)
+    total = invoicer.total(cart)
 
     if error
       puts error
     else
-      puts "Your cart:
-
-" + line_items_string(line_items) +
-"---
-Total $" + cents_for_output(invoicer.total(cart))
+      puts cart_output(line_items, total)
     end
   end
 
   private
+
+  def self.cart_output(line_items, total)
+    "Your cart:
+
+" + line_items_string(line_items) +
+"---
+Total $" + cents_for_output(total)
+  end
 
   def self.line_items_string(line_items)
     string = ""
