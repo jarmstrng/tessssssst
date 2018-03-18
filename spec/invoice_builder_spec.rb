@@ -3,18 +3,18 @@ require 'invoice_builder'
 require 'order'
 require 'line_item'
 
-
 product_database = {
   1 => Product.new("Black Jacobins", 20_00),
   2 => Product.new("Freedom Is a Constant Struggle", 15_00)
 }
 
 describe InvoiceBuilder do
-  context "with bad quantity" do
+  # TODO: do i even want to handle it this way?
+  # maybe if quantity is zero, just remove it from line items or don't display it
+  context "with zero quantity" do
     it "returns an error" do
       invoicer = InvoiceBuilder.new
-      qty = 0
-      line_items = [LineItem.new(product_database[1], qty)]
+      line_items = [LineItem.new(product_database[1], 1), LineItem.new(product_database[1], 0)]
       error = "We're sorry, something went wrong. Please check your order and try again."
 
       expect(invoicer.validate_qty(line_items)).to eq(error)
