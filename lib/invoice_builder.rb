@@ -14,7 +14,7 @@ class InvoiceBuilder
   def total(cart)
     total_in_cents = 0
     cart[0].each do |item|
-      total_in_cents += item.product_id.price_cents
+      total_in_cents += (item.product_id.price_cents * item.quantity)
     end
 
     total_in_cents

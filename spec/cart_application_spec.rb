@@ -31,7 +31,7 @@ Total $20.00"
 
 2 copy of \"Black Jacobins\" for $20.00
 ---
-Total $20.00"
+Total $40.00"
 
       expect(STDOUT).to receive(:puts).with(output)
       CartApplication.display_cart(cart)

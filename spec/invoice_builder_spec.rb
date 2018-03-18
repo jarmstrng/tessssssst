@@ -28,6 +28,13 @@ describe InvoiceBuilder do
 
       expect(invoicer.total(cart)).to eq(35_00)
     end
+
+    it "returns the correct total for line items with quantity >1" do
+      invoicer = InvoiceBuilder.new
+      cart = Order.new([LineItem.new(product_database[1], 1), LineItem.new(product_database[2], 2)])
+
+      expect(invoicer.total(cart)).to eq(50_00)
+    end
   end
 
   context "build_line_items" do
