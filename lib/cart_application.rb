@@ -18,7 +18,7 @@ class CartApplication
 
 " + line_items_string(cart) +
 "---
-Total $" + total(cart)
+Total $" + cents_for_output(invoicer.total(cart))
     end
   end
 
@@ -34,14 +34,5 @@ Total $" + total(cart)
 
   def self.cents_for_output(price_cents)
     '%.2f' % (price_cents / 100)
-  end
-
-  def self.total(cart)
-    total_in_cents = 0
-    cart[0].each do |item|
-      total_in_cents += item.product_id.price_cents
-    end
-
-    cents_for_output(total_in_cents)
   end
 end

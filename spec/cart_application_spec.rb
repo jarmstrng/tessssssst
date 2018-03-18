@@ -73,21 +73,6 @@ Total $35.00"
       expect(STDOUT).to receive(:puts).with(output)
       CartApplication.display_cart(cart)
     end
-
-    context "order with no discounts" do
-      it "displays the correct total" do
-        cart = Order.new([LineItem.new(product_database[1], 1), LineItem.new(product_database[2], 1)])
-        output = "Your cart:
-
-1 copy of \"Black Jacobins\" for $20.00
-1 copy of \"Freedom Is a Constant Struggle\" for $15.00
----
-Total $35.00"
-
-        expect(STDOUT).to receive(:puts).with(output)
-        CartApplication.display_cart(cart)
-      end
-    end
   end
 end
 

@@ -1,10 +1,6 @@
 #rename this to Invoice??
 
 class InvoiceBuilder
-
-  def initialize
-  end
-
   def validate_qty(line_items)
     error = nil
     line_items.each do |item|
@@ -12,6 +8,15 @@ class InvoiceBuilder
       error = item.quantity > 0 ? nil : error_string
     end
 
-    @error = error
+    error
+  end
+
+  def total(cart)
+    total_in_cents = 0
+    cart[0].each do |item|
+      total_in_cents += item.product_id.price_cents
+    end
+
+    total_in_cents
   end
 end
