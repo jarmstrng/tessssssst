@@ -11,22 +11,25 @@ class CartApplication
     invoicer = InvoiceBuilder.new
     error = invoicer.validate_qty(cart[0])
 
+    line_items = invoicer.build_full_line_items(cart)
+
     if error
       puts error
     else
       puts "Your cart:
 
-" + line_items_string(cart) +
+" + line_items_string(line_items) +
 "---
 Total $" + cents_for_output(invoicer.total(cart))
     end
   end
 
-  def self.line_items_string(cart)
+  private
+
+  def self.line_items_string(line_items)
     string = ""
-    cart[0].each do |item|
-      string += "#{item.quantity} copy of \"#{item.product_id.name}\" for $#{cents_for_output(item.product_id.price_cents)}\n"
-      # this item.product_id.name feels really funky
+    line_items.each do |item|
+      string += "#{item[:quantity]} copy of \"#{item[:product_name]}\" for $#{cents_for_output(item[:original_price])}\n"
     end
 
     string
