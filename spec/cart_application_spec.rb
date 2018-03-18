@@ -2,7 +2,7 @@ require 'cart_application'
 require 'order'
 require 'line_item'
 require 'product'
-require 'invoice_builder'
+require 'invoice'
 
 product_database = {
   1 => Product.new("Black Jacobins", 20_00),

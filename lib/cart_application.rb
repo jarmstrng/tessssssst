@@ -1,14 +1,11 @@
-require 'invoice_builder'
+require 'invoice'
 require 'printer'
 
 class CartApplication
   def self.display_cart(cart)
-    invoicer = InvoiceBuilder.new
-
-    line_items = invoicer.build_full_line_items(cart)
-    total = invoicer.total(cart)
-
+    invoice = Invoice.new(cart)
     printer = Printer.new
-    printer.display(line_items, total)
+
+    printer.display(invoice)
   end
 end

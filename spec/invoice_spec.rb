@@ -1,5 +1,5 @@
 require 'product'
-require 'invoice_builder'
+require 'invoice'
 require 'order'
 require 'line_item'
 
@@ -8,27 +8,27 @@ product_database = {
   2 => Product.new("Freedom Is a Constant Struggle", 15_00)
 }
 
-describe InvoiceBuilder do
-  context "order with no discounts" do
+describe Invoice do
+  context "total_cost" do
     it "returns the correct total" do
-      invoicer = InvoiceBuilder.new
       cart = Order.new([LineItem.new(product_database[1], 1), LineItem.new(product_database[2], 1)])
+      invoice = Invoice.new(cart)
 
-      expect(invoicer.total(cart)).to eq(35_00)
+      expect(invoice.total).to eq(35_00)
     end
 
     it "returns the correct total for line items with quantity >1" do
-      invoicer = InvoiceBuilder.new
       cart = Order.new([LineItem.new(product_database[1], 1), LineItem.new(product_database[2], 2)])
+      invoice = Invoice.new(cart)
 
-      expect(invoicer.total(cart)).to eq(50_00)
+      expect(invoice.total).to eq(50_00)
     end
   end
 
   context "build_line_items" do
     it "returns full line items" do
-      invoicer = InvoiceBuilder.new
       cart = Order.new([LineItem.new(product_database[1], 1), LineItem.new(product_database[2], 2)])
+      invoice = Invoice.new(cart)
       expected_items = [
           {
             product_name: "Black Jacobins",
@@ -42,13 +42,13 @@ describe InvoiceBuilder do
           }
         ]
 
-      expect(invoicer.build_full_line_items(cart)).to eq(expected_items)
+      expect(invoice.full_line_items).to eq(expected_items)
     end
 
     context "with item having quantity of zero" do
       it "does not include zero-quantity items" do
-        invoicer = InvoiceBuilder.new
         cart = Order.new([LineItem.new(product_database[1], 0), LineItem.new(product_database[2], 2)])
+        invoice = Invoice.new(cart)
         expected_items = [
             {
               product_name: "Freedom Is a Constant Struggle",
@@ -57,7 +57,7 @@ describe InvoiceBuilder do
             }
           ]
 
-        expect(invoicer.build_full_line_items(cart)).to eq(expected_items)
+        expect(invoice.full_line_items).to eq(expected_items)
       end
     end
   end

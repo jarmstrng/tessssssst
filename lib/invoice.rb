@@ -1,7 +1,14 @@
-#rename this to Invoice??
+class Invoice
+  attr_reader :total, :full_line_items
 
-class InvoiceBuilder
-  def total(cart)
+  def initialize(cart)
+    @total = total_cost(cart)
+    @full_line_items = build_full_line_items(cart)
+  end
+
+  private
+
+  def total_cost(cart)
     total_in_cents = 0
     cart[0].each do |item|
       total_in_cents += (item.product_id.price_cents * item.quantity)

@@ -1,6 +1,6 @@
 class Printer
-  def display(line_items, total)
-    puts formatted_cart_output(line_items, total)
+  def display(invoice)
+    puts formatted_cart_output(invoice.full_line_items, invoice.total)
   end
 
   private
