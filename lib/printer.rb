@@ -1,15 +1,11 @@
 class Printer
-  def display(error, line_items, total)
-    if error # TODO: do i even want to handle it this way? (no)
-      puts error
-    else
-      puts cart_output(line_items, total)
-    end
+  def display(line_items, total)
+    puts formatted_cart_output(line_items, total)
   end
 
   private
 
-  def cart_output(line_items, total)
+  def formatted_cart_output(line_items, total)
     "Your cart:
 
 " + line_items_string(line_items) +
