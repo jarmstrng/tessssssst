@@ -2,8 +2,8 @@ class Invoice
   attr_reader :total, :full_line_items
 
   def initialize(cart)
-    @total = total_cost(cart)
     @full_line_items = build_full_line_items(cart)
+    @total = total_cost(cart)
   end
 
   private

@@ -25,39 +25,3 @@ Total $50.00"
     end
   end
 end
-
-
-
-
-
-
-
-
-
-# displays stuff
-# has correct total
-
-# :all applies discount to all products (assumption based on example)
-# :product_ids applies discount only to products in list
-# - does not apply to product not in list
-# - applies to one product in list
-# - applies to multiple products in list
-
-# order with
-# - no discount
-# - :all discount
-# - :product_ids discount and no applicable products
-# - :product_ids discount and one applicable product and one not-applicable product
-# - :product_ids discount and two different applicable products
-# - :product_ids discound and two applicable & 1 not-applicable?
-
-# handle quantities (incl 0)
-# dollars_in_cents
-
-# differences in input/arguments
-
-# copy vs copies?
-
-# output formatter
-
-# cart_application_spec requires wayyyy too many other things
